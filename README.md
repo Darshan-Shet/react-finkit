@@ -1,9 +1,11 @@
 # 💰 react-finkit
 
 A lightweight React component library for building **personal finance UIs** — budgets, savings goals, and net worth dashboards.
+
 ![npm version](https://img.shields.io/npm/v/@darshan-shet/react-finkit)
 ![downloads](https://img.shields.io/npm/dm/@darshan-shet/react-finkit)
 ![license](https://img.shields.io/npm/l/@darshan-shet/react-finkit)
+
 ---
 
 ## ✨ Why react-finkit?
