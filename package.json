@@ -1,9 +1,16 @@
 {
   "name": "react-finkit",
-  "version": "0.1.0",
-  "main": "dist/react-finkit.umd.cjs",
-  "module": "dist/react-finkit.js",
+  "version": "0.1.5",
+  "main": "dist/react-finkit.cjs",
+  "module": "dist/react-finkit.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/react-finkit.mjs",
+      "require": "./dist/react-finkit.cjs"
+    }
+  },
   "files": ["dist"],
   "peerDependencies": {
     "react": ">=18",
@@ -17,7 +24,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "vite build && tsc -p tsconfig.build.json",
     "lint": "eslint .",
     "preview": "vite preview"
   },

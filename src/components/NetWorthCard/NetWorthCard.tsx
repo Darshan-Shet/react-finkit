@@ -5,16 +5,20 @@ import { formatCurrency } from "../../utils/formatCurrency"
 type Props = {
   assets: number
   liabilities: number
+  title?: string
   currency?: string
   locale?: string
+  showBreakdown?: boolean
   className?: string
 }
 
 export default function NetWorthCard({
   assets,
   liabilities,
+  title = "Net Worth",
   currency = "INR",
   locale = "en-IN",
+  showBreakdown = true,
   className,
 }: Props) {
   const netWorth = calcNetWorth(assets, liabilities)
@@ -22,11 +26,8 @@ export default function NetWorthCard({
 
   return (
     <div className={clsx("p-4 border rounded-xl space-y-3", className)}>
-      
-      {/* Title */}
-      <h3 className="text-sm text-gray-500">Net Worth</h3>
+      <h3 className="text-sm text-gray-500">{title}</h3>
 
-      {/* Net Worth Value */}
       <p
         className={clsx(
           "text-xl font-semibold",
@@ -36,16 +37,19 @@ export default function NetWorthCard({
         {formatCurrency(netWorth, { currency, locale })}
       </p>
 
-      {/* Breakdown */}
-      <div className="flex justify-between text-sm text-gray-600">
-        <span>Assets</span>
-        <span>{formatCurrency(assets, { currency, locale })}</span>
-      </div>
+      {showBreakdown ? (
+        <>
+          <div className="flex justify-between text-sm text-gray-600">
+            <span>Assets</span>
+            <span>{formatCurrency(assets, { currency, locale })}</span>
+          </div>
 
-      <div className="flex justify-between text-sm text-gray-600">
-        <span>Liabilities</span>
-        <span>{formatCurrency(liabilities, { currency, locale })}</span>
-      </div>
+          <div className="flex justify-between text-sm text-gray-600">
+            <span>Liabilities</span>
+            <span>{formatCurrency(liabilities, { currency, locale })}</span>
+          </div>
+        </>
+      ) : null}
     </div>
   )
 }

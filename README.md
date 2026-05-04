@@ -2,9 +2,9 @@
 
 A lightweight React component library for building **personal finance UIs** — budgets, savings goals, and net worth dashboards.
 
-![npm version](https://img.shields.io/npm/v/@darshan-shet/react-finkit)
-![downloads](https://img.shields.io/npm/dm/@darshan-shet/react-finkit)
-![license](https://img.shields.io/npm/l/@darshan-shet/react-finkit)
+![npm version](https://img.shields.io/npm/v/react-finkit)
+![downloads](https://img.shields.io/npm/dm/react-finkit)
+![license](https://img.shields.io/npm/lå/react-finkit)
 
 ---
 
@@ -35,7 +35,9 @@ npm install react-finkit
 import {
   ExpenseBar,
   SavingsGoal,
-  NetWorthCard
+  NetWorthCard,
+  BudgetRing,
+  CashFlowChart
 } from "react-finkit"
 ```
 
@@ -101,6 +103,52 @@ Simple net worth breakdown.
 
 ---
 
+### ⭕ BudgetRing
+
+Visual circular budget tracking for compact dashboards.
+
+```tsx
+<BudgetRing
+  spent={18000}
+  budget={25000}
+  currency="INR"
+  locale="en-IN"
+/>
+```
+
+✅ Shows:
+
+* Circular spending progress
+* Remaining or over-budget state
+* Compact summary for cards and widgets
+
+---
+
+### 📈 CashFlowChart
+
+Compare income vs. spend over time with a lightweight line chart.
+
+```tsx
+<CashFlowChart
+  data={[
+    { label: "Jan", income: 90000, spend: 52000 },
+    { label: "Feb", income: 88000, spend: 61000 },
+    { label: "Mar", income: 94000, spend: 57000 },
+    { label: "Apr", income: 97000, spend: 64000 }
+  ]}
+  currency="INR"
+  locale="en-IN"
+/>
+```
+
+✅ Shows:
+
+* Income and spend trend lines
+* Net cash flow summary
+* Compact period-by-period breakdown
+
+---
+
 ## 🌍 Currency & Locale Support
 
 All components support international formatting:
@@ -123,7 +171,7 @@ All components support international formatting:
 ### formatCurrency
 
 ```ts
-import { formatCurrency } from "react-finkit"
+import { formatCurrency, calcNetWorth, daysToGoal, calcSavingsProgress } from "react-finkit"
 
 formatCurrency(100000)
 // ₹1,00,000 (default)
@@ -135,6 +183,15 @@ formatCurrency(100000, {
   locale: "en-US"
 })
 // $100,000
+
+calcNetWorth(500000, 200000)
+// 300000
+
+daysToGoal(20000, 100000, 5000)
+// 480
+
+calcSavingsProgress(25000, 100000)
+// 25
 ```
 
 ---
@@ -166,7 +223,9 @@ src/
  ├── components/
  │    ├── ExpenseBar/
  │    ├── SavingsGoal/
- │    └── NetWorthCard/
+ │    ├── NetWorthCard/
+ │    ├── BudgetRing/
+ │    └── CashFlowChart/
  ├── hooks/
  ├── utils/
  └── index.ts
@@ -176,7 +235,7 @@ src/
 
 ## 🚧 Roadmap
 
-* [ ] Chart components (CashFlow, BudgetRing)
+* [x] Chart components (CashFlow, BudgetRing)
 * [ ] Storybook docs
 * [ ] More financial utilities
 * [ ] Dark mode support

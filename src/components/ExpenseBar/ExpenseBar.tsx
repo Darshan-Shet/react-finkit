@@ -4,25 +4,36 @@ import { formatCurrency } from "../../utils/formatCurrency"
 type Props = {
   spent: number
   budget: number
+  label?: string
   currency?: string
   locale?: string
+  showBudget?: boolean
   className?: string
 }
 
 export default function ExpenseBar({
   spent,
   budget,
+  label,
   currency = "INR",
   locale = "en-IN",
+  showBudget = false,
   className,
 }: Props) {
-  const percentage = Math.min((spent / budget) * 100, 100)
-  const isOver = spent > budget
+  const safeBudget = budget > 0 ? budget : 0
+  const percentage = safeBudget === 0 ? 0 : Math.min((spent / safeBudget) * 100, 100)
+  const isOver = safeBudget > 0 && spent > safeBudget
 
   return (
     <div className={clsx("w-full", className)}>
       <div className="flex justify-between text-sm mb-1">
-        <span>{formatCurrency(spent, { currency, locale })}</span>
+        <span>
+          {label ? `${label}: ` : ""}
+          {formatCurrency(spent, { currency, locale })}
+          {showBudget
+            ? ` / ${formatCurrency(safeBudget, { currency, locale })}`
+            : ""}
+        </span>
         <span>{Math.round(percentage)}%</span>
       </div>
 

@@ -8,10 +8,11 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'ReactFinkit',
-      fileName: 'react-finkit',
+      formats: ['es', 'cjs'],
+      fileName: (format) => format === 'es' ? 'react-finkit.mjs' : 'react-finkit.cjs',
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: ['react', 'react-dom', 'react/jsx-runtime'],
     },
   },
 })
